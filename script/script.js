@@ -13,14 +13,32 @@ onload=function(){
 
     //validation
     const ERROR_MESSAGES = {
-
+        requirdfname: 'first name is requird',
+        requirdlname:'last name is requird',
         requirdEmail: 'email is requird',
-        validEmail: 'email is not valid'
-
+        validEmail: 'email is not valid',
+        requirdJoinDt: 'joined date is requird',
+        vaildJoinDt: 'The joined date cannot be after the current date.',
+        requirdCity: 'city is requird',
+        requirdPostalCd:'postal code is requird',
+        requirdAvailability:'availability is requird'
     }
 
     const emailformat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const validateForm = () =>{
+        //fname
+        if(fname.value === ''){
+            setErrorForm(fname, ERROR_MESSAGES.requirdfname);
+        }else{
+            setSuccessForm(fname);
+        }
+
+        //lname
+        if(lname.value === ''){
+            setErrorForm(lname, ERROR_MESSAGES.requirdlname);
+        }else{
+            setSuccessForm(lname);
+        }
 
         //email
         if(email.value === ''){
@@ -30,21 +48,78 @@ onload=function(){
         }else{
             setSuccessForm(email);
         }
+
+        //joined date
+        if(joinedDate.value === ''){
+            setErrorForm(joinedDate, ERROR_MESSAGES.requirdJoinDt);
+        }else{
+            setSuccessForm(joinedDate);
+        }
+        const now = new Date();
+        const year = now.getFullYear();
+        var month = now.getMonth()+1;
+        if(month < 10){
+            month = '0'+ month;
+        }
+        var date = now.getDate();
+        if(date < 10){
+            date = '0'+ date;
+        }
+        const today = year+''+month+''+date;
+
+        if(joinedDate.value.replaceAll('-','') > today){
+            setErrorForm(joinedDate, ERROR_MESSAGES.vaildJoinDt);
+        }
+        //city
+        if(city.value === ''){
+            setErrorForm(city, ERROR_MESSAGES.requirdCity);
+        }else{
+            setSuccessForm(city);
+        }
+
+        //postal code
+        if(postalCd.value === ''){
+            setErrorForm(postalCd, ERROR_MESSAGES.requirdPostalCd);
+        }else{
+            setSuccessForm(postalCd);
+        }
+
+        //availability
+        // if(availability.value === ''){
+        //     setErrorForm(availability, ERROR_MESSAGES.requirdAvailability);
+        // }else{
+        //     setSuccessForm(availability);
+        // }
+        
+
     }
 
     const setErrorForm = (input, message) =>{
-        const formControl = input.parentElement;
-        formControl.classList.remove('success');
-        formControl.classList.add('error');
-        const small = formControl.querySelector('small');
+        const formGroup = input.parentElement;
+        formGroup.classList.remove('success');
+        formGroup.classList.add('error');
+        const small = formGroup.querySelector('small');
         small.textContent = message;
         small.style.display = 'block';
     }
 
     const setSuccessForm = (input) =>{
-        const formControl = input.parentElement;
-        formControl.classList.remove('error');
-        formControl.classList.add('success');
+        const formGroup = input.parentElement;
+        formGroup.classList.remove('error');
+        formGroup.classList.add('success');
+        const small = formGroup.querySelector('small');
+        small.style.display = 'none';
+    }
+
+    const checkError = ()=>{
+        const formGroup = document.querySelectorAll('.form-group');
+        for(const f of formGroup){
+            if(f.classList.contains('error')){
+                return false;
+                break;
+            }
+        }
+        return true;
     }
 
     let employees = [];
@@ -65,6 +140,10 @@ onload=function(){
         e.preventDefault();
 
         validateForm();
+        if(!checkError()){
+            return false;
+            console.log(checkError());
+        }
 
         let newEmployee = {
             id: `${new Date().getTime()}${Math.round(Math.random()*20)}`,

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style/easySelectStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <style>
         body{
             margin: 20px;
@@ -27,8 +27,32 @@
             padding:10px;
         }
 
-        .error{
+        .form-group {
+            position: relative;
+        }
+
+        .form-group i{
+            position:absolute;
+            top: 35px;
+            right: 25px;
+            display: none;
+        }
+
+        .form-group.success input{
+            border-color: green;
+        }
+        .form-group.error input{
+            border-color: red;
+        }
+
+        .form-group.success .fa-check{
+            color: green;
+            display: block;
+        }
+
+        .form-group.error .fa-times{
             color: red;
+            display: block;
         }
 
         small{
@@ -44,29 +68,44 @@
         <div class="form-group">
             <label for="fname-input">first name</label>
             <input type="text" class="form-control" id="fname" placeholder="first name">
+            <i class="fas fa-check"></i>
+            <i class="fas fa-times"></i>
+            <small>Error Message</small>
         </div>
         <div class="form-group">
             <label for="fname-input">last name</label>
             <input type="text" class="form-control" id="lname" placeholder="last name">
+            <i class="fas fa-check"></i>
+            <i class="fas fa-times"></i>
+            <small>Error Message</small>
         </div>
         <div class="form-group">
             <label for="fname-input">email</label>
             <input type="text" class="form-control" id="email" placeholder="email">
+            <i class="fas fa-check"></i>
+            <i class="fas fa-times"></i>
             <small>Error Message</small>
         </div>
         <div class="form-group">
             <label for="joinedDate">Joined Date:</label>
             <input type="date" id="joinedDate" >
+            <small>Error Message</small>
         </div>
         <div class="form-group">
             <label for="fname-input">city</label>
             <input type="text" class="form-control" id="city" placeholder="city">
+            <i class="fas fa-check"></i>
+            <i class="fas fa-times"></i>
+            <small>Error Message</small>
         </div>
         <div class="form-group">
             <label for="fname-input">postal code</label>
             <input type="text" class="form-control" id="postalCd" placeholder="postal code">
+            <i class="fas fa-check"></i>
+            <i class="fas fa-times"></i>
+            <small>Error Message</small>
         </div>
-        <div class="form-group col-6">
+        <div class="form-group">
             <label for="my-select">Availabilities</label>
             <select multiple class="form-control" id="my-select">
                 <option value="sunday">Sunday</option>
@@ -77,6 +116,9 @@
                 <option value="friday">Friday</option>
                 <option value="saturday">Saturday</option>
             </select>
+            <i class="fas fa-check"></i>
+            <i class="fas fa-times"></i>
+            <small>Error Message</small>
         </div>
  
         <button type="submit" class="btn btn-primary" id="btn-submit">Add</button>
